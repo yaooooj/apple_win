@@ -1,0 +1,12 @@
+{
+  "my_profile":
+  {
+    "name":"张三",
+    "phone_num": "",
+    "mail": "mail@163.coim",
+    "id": "1234566777777878",
+    "city": "深圳",
+    "degree": "大专",
+    "marital": "未婚"
+  }
+}

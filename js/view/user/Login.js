@@ -4,18 +4,18 @@ import PropTypes from 'prop-types';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-import px2dp from '../util/px2dp';
-import Button from '../component/Button';
-import SmsCaptchaInput from '../component/SmsCaptureInput';
-import PhoneNumInput from  '../component/NumberInput';
-import Validator from '../util/validator';
+import px2dp from '../../util/px2dp';
+import Button from '../../component/Button';
+import SmsCaptchaInput from '../../component/SmsCaptureInput';
+import PhoneNumInput from '../../component/NumberInput';
+import Validator from '../../util/validator';
 
 
 export default class Login extends React.Component {
     static navigationOptions = ({navigation}) => {
         const params = navigation.state.params || {};
         return {
-            headerTitle: "我的",
+            headerTitle: "登录",
         };
     };
 
@@ -97,7 +97,7 @@ export default class Login extends React.Component {
         return (
         <View style={styles.view}>
                 <View style={styles.logo}>
-                    <Image  style={{width:px2dp(45), height:px2dp(45)}} source={require('../image/ic_login_logo.png')}/>
+                    <Image  style={{width:px2dp(45), height:px2dp(45)}} source={require('../../image/ic_login_logo.png')}/>
                     <Text style={{margin: 20, color: '#bbb'}}>
                         让借钱变得更简单
                     </Text>

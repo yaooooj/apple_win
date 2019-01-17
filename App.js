@@ -10,17 +10,16 @@ import React, {Component} from 'react';
 import { Text, View, Button, ToastAndroid } from 'react-native';
 import { createStackNavigator, createAppContainer, createBottomTabNavigator } from "react-navigation";
 
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from "react-native-vector-icons/AntDesign";
 
-import HomeView from './js/view/HomeView';
-import OderView from './js/view/OderView';
-import UserView from './js/view/Login';
-import DetailsView from './js/view/DetailsView';
-import SignView from './js/view/SignView';
-import Profile from  './js/view/Profile';
-import Test from  './js/view/test';
-import SettingView from "./js/view/SettingView";
+import HomeView from './js/view/home/HomeView';
+import DetailsView from './js/view/home/DetailsView';
+import Order from './js/view/order/Order';
+
+import Login from './js/view/user/Login';
+import About from "./js/view/user/About";
+import Profile from "./js/view/user/Profile";
+import MyProfile from "./js/view/user/MyProfile"
 
 
 
@@ -58,11 +57,13 @@ HomeStack.navigationOptions = ({ navigation }) => {
 
 const UserStack = createStackNavigator(
     {
-        User: { screen: UserView },
-        Sign: {screen: SignView },
+        Login: Login,
+        About: About,
+        Profile: Profile,
+        MyProfile: MyProfile,
     },
     {
-        initialRouteName: "User",
+        initialRouteName: "Profile",
         defaultNavigationOptions: {
             headerStyle: {
                 backgroundColor: '#046ada',
@@ -78,13 +79,10 @@ const UserStack = createStackNavigator(
 
 const OderStack = createStackNavigator(
     {
-        Oder: { screen: OderView },
-        Profile: Profile,
-        Test: Test,
-        Setting: SettingView,
+        Oder: { screen: Order },
     },
       {
-        initialRouteName: "Test",
+        initialRouteName: "Oder",
           defaultNavigationOptions: {
               headerStyle: {
                   backgroundColor: '#6a51ae',

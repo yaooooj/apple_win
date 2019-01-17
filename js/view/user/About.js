@@ -1,39 +1,38 @@
-/**
- * Created by wangdi on 4/11/16.
- */
-'use strict';
+import React, {Component} from 'react';
+import {
+    View,
+    Text,
+    ScrollView,
+    Platform,
+    TouchableNativeFeedback,
+    TouchableOpacity,
+    StyleSheet, PixelRatio, Alert, AlertIOS
+} from "react-native";
 
-import React, {Component,} from 'react';
-import PropTypes from 'prop-types';
-import {Text, View, StyleSheet, Platform, Button, PixelRatio, TouchableNativeFeedback, TouchableOpacity, ToastAndroid, Alert, AlertIOS, ScrollView} from 'react-native';
-import px2dp from '../util/px2dp';
+import Button from '../../component/Button';
 import Icon from 'react-native-vector-icons/Ionicons';
-import theme from '../config/theme';
-import Avatar from '../component/Avatar';
-import TextButton from '../component/TextButton';
-import SettingPage from './SettingView';
-import IndividualPage from './Profile';
+import px2dp from "../../util/px2dp";
+import theme from "../../config/theme";
+import PropTypes from "prop-types";
 
-export default class Test extends Component{
-    constructor(props){
+
+export default class About extends React.Component {
+
+
+    constructor(props) {
         super(props);
-        this.state = {
-
-        };
+        this.state = {};
+        this.handleBack = this._handleBack.bind(this);
     }
+
+
+    _handleBack() {
+        alert('logout');
+    }
+
 
     _onPressCallback(position){
         switch(position){
-            case 0:  //title
-                this.props.navigator.push({
-                    component: IndividualPage
-                });
-                break;
-
-            case 1:  // add occupation
-                this._alert();
-                break;
-
             case 2:  //collection
                 this._alert();
                 break;
@@ -47,65 +46,48 @@ export default class Test extends Component{
                 break;
 
             case 5:  //rank
-                this._alert();
+                this._alert("logout");
                 break;
-
-            case 6: {  //setting
-                this.props.navigation.navigate('Setting');
-
-                break;
-            }
         }
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <View style={styles.container}>
                 <ScrollView>
-                    {Platform.OS === 'android' ?
-                        <TouchableNativeFeedback onPress={this._onPressCallback.bind(this, 2)}>
-                            <View style={styles.intro}>
-                                <Avatar image={require('../image/ic_login_logo.png')} size={px2dp(55)} textSize={px2dp(20)}/>
-                                <View style={{marginLeft: px2dp(12)}}>
-                                    <Text style={{color: theme.text.color, fontSize: px2dp(20)}}>React_Native</Text>
-                                    <TextButton text="添加职位 @添加公司" color="#949494" fontSize={px2dp(13)} onPress={this._onPressCallback.bind(this, 2)}/>
-                                </View>
-                                <View style={{flex: 1, flexDirection:'row', justifyContent: 'flex-end'}}>
-                                    <Icon name="ios-arrow-forward" color="#ccc" size={px2dp(30)}/>
-                                </View>
-                            </View>
-                        </TouchableNativeFeedback>
-                        :
-                        <TouchableOpacity onPress={this._onPressCallback.bind(this, 2)} activeOpacity={theme.btnActiveOpacity}>
-                            <View style={styles.intro}>
-                                <Avatar image={require('../image/ic_login_logo.png')} size={px2dp(55)} textSize={px2dp(20)}/>
-                                <View style={{marginLeft: px2dp(12)}}>
-                                    <Text style={{color: theme.text.color, fontSize: px2dp(20)}}>WangdiCoder</Text>
-                                    <TextButton text="添加职位 @添加公司" color="#949494" fontSize={px2dp(13)} onPress={this._onPressCallback.bind(this, 2)}/>
-                                </View>
-                                <View style={{flex: 1, flexDirection:'row', justifyContent: 'flex-end'}}>
-                                    <Icon name="ios-arrow-forward" color="#ccc" size={px2dp(30)}/>
-                                </View>
-                            </View>
-                        </TouchableOpacity>
-                    }
                     <View style={styles.list}>
-                        <Item icon="md-heart" text="我的申请" subText="15篇" iconColor="#32cd32" onPress={this._onPressCallback.bind(this, 2)}/>
-                        <Item icon="md-eye" text="我的资料" subText="15篇" onPress={this._onPressCallback.bind(this, 3)}/>
+                        <Item icon="md-eye" text="用户协议"  onPress={this._onPressCallback1.bind(this, 2)}/>
+                        <Item icon="md-pricetag" text="商务合作"  onPress={this._onPressCallback.bind(this, 3)}/>
+                        <Item icon="md-pricetag" text="给个好评吧！"  onPress={this._onPressCallback.bind(this, 4)}/>
                     </View>
                     <View style={styles.list}>
-                        <Item icon="md-settings" text="设置" onPress={this._onPressCallback.bind(this, 6)}/>
+                        { Platform.OS === 'android' ?
+                            <TouchableNativeFeedback>
+                                <View style={[styles.listItem, {justifyContent: 'center'}]}>
+                                    <Text style={{color: 'red', fontSize: px2dp(15)}}>退出登录</Text>
+                                </View>
+                            </TouchableNativeFeedback>
+                            :
+                            <TouchableOpacity activeOpacity={theme.btnActiveOpacity} onPress={this._onPressCallback.bind(this, 5)}>
+                                <View style={[styles.listItem, {justifyContent: 'center'}]}>
+                                    <Text style={{color: 'red', fontSize: px2dp(15)}}>退出登录</Text>
+                                </View>
+                            </TouchableOpacity>
+                        }
+                    </View>
+                    <View style={{flexDirection: 'row' , justifyContent: 'center', marginBottom: 30, marginTop: 20}}>
+                        <Text style={{color: '#ccc'}}>掘金 3.7.3 - gold.xitu.io</Text>
                     </View>
                 </ScrollView>
             </View>
         );
     }
 
-    _alert(){
+    _alert(msg){
         if(Platform.OS === 'android') {
             Alert.alert(
                 'Message',
-                "This function currently isn't available",
+                {msg},
                 [{text: 'OK', onPress: () => {}}]
             );
         }else if(Platform.OS === 'ios'){
@@ -118,7 +100,8 @@ export default class Test extends Component{
     }
 }
 
-class Item extends Component{
+
+class Item extends Component {
     static propTypes = {
         icon: PropTypes.string.isRequired,
         iconColor: PropTypes.string,
@@ -131,11 +114,22 @@ class Item extends Component{
         iconColor: 'gray'
     };
 
-    render(){
+
+    _handleBack() {
+        const navigator = this.props.navigator;
+        if (navigator && navigator.getCurrentRoutes().length > 1) {
+            navigator.pop();
+            alert('hello');
+            return true;
+        }
+        return false;
+    }
+
+    render() {
         const {icon, iconColor, text, subText, onPress} = this.props;
 
-        if(Platform.OS === 'android'){
-            return(
+        if (Platform.OS === 'android') {
+            return (
                 <TouchableNativeFeedback onPress={onPress}>
                     <View style={styles.listItem}>
                         <Icon name={icon} size={px2dp(22)} color={iconColor}/>
@@ -146,8 +140,8 @@ class Item extends Component{
                     </View>
                 </TouchableNativeFeedback>
             );
-        }else if(Platform.OS === 'ios'){
-            return(
+        } else if (Platform.OS === 'ios') {
+            return (
                 <TouchableOpacity onPress={onPress} activeOpacity={theme.btnActiveOpacity}>
                     <View style={styles.listItem}>
                         <Icon name={icon} size={px2dp(22)} color={iconColor}/>
@@ -202,5 +196,5 @@ const styles = StyleSheet.create({
         paddingRight: px2dp(25),
         borderBottomColor: '#c4c4c4',
         borderBottomWidth: 1/PixelRatio.get()
-    },
+    }
 });
