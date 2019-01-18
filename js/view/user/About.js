@@ -56,7 +56,7 @@ export default class About extends React.Component {
             <View style={styles.container}>
                 <ScrollView>
                     <View style={styles.list}>
-                        <Item icon="md-eye" text="用户协议"  onPress={this._onPressCallback1.bind(this, 2)}/>
+                        <Item icon="md-eye" text="用户协议"  onPress={this._onPressCallback.bind(this, 2)}/>
                         <Item icon="md-pricetag" text="商务合作"  onPress={this._onPressCallback.bind(this, 3)}/>
                         <Item icon="md-pricetag" text="给个好评吧！"  onPress={this._onPressCallback.bind(this, 4)}/>
                     </View>
