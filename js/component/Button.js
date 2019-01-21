@@ -10,6 +10,10 @@ export default class Button extends Component{
     static propTypes = {
         text: PropTypes.string,
         onPress: PropTypes.func,
+        backgroundColor: PropTypes.string,
+    };
+    static defaultProps = {
+        backgroundColor: '#046ada'
     };
 
     render(){
@@ -34,7 +38,7 @@ export default class Button extends Component{
 
     _renderContent(){
         return(
-            <View style={{flex: 1, height: px2dp(45), backgroundColor: '#046ada', alignItems:'center', justifyContent:'center',
+            <View style={{flex: 1, height: px2dp(45), backgroundColor: this.props.backgroundColor, alignItems:'center', justifyContent:'center',
                 borderRadius: 3}}>
                 <Text style={styles.text}>{this.props.text}</Text>
             </View>

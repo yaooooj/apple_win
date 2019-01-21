@@ -4,7 +4,7 @@ import React,{ Component } from 'react';
 import PropTypes from 'prop-types'
 import ReactNative, {Text, View, StyleSheet, Platform, TouchableOpacity, TouchableNativeFeedback, Image,ViewPropTypes} from 'react-native';
 import px2dp from '../util/px2dp';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon  from 'react-native-vector-icons/Ionicons';
 import theme from '../config/theme';
 
 export default class ImageButton extends Component{
@@ -91,7 +91,8 @@ export default class ImageButton extends Component{
 const styles = StyleSheet.create({
     view:{
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        padding: 7,
     },
     text:{
         color: 'rgba(255,255,255,0.7)',

@@ -6,6 +6,18 @@ import {
     View,
     TextInput,
 } from 'react-native';
+import theme from '../../config/theme';
+import { ThemeProvider, Button, Card,  withTheme } from 'react-native-elements';
+
+const theme1 = {
+    Button: {
+        titleStyle: {
+            color: 'red',
+        },
+    },
+};
+
+
 
 //默认应用的容器组件
 export default class Order extends Component {
@@ -34,14 +46,17 @@ export default class Order extends Component {
         console.log("文字状态值改变，界面渲染完毕!");
     }
 
+
+
     render() {
         return (
             <View style={[styles.flex, styles.topStatus]}>
-                <TextInput style={styles.input}
-                           onChangeText={ (newText) => this.updateText(newText) }/>
-                <Text style={styles.tip}>已输入{this.state.text.length}个文字</Text>
-                <Text style={styles.tip}>老的状态{this.state.text}</Text>
+                <ThemeProvider theme={theme1}>
+                    <Card title="My Button" titleStyle={{ color: 'pink' }} />
+                </ThemeProvider>
             </View>
+
+
         );
     }
 }

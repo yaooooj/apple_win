@@ -20,6 +20,7 @@ import Login from './js/view/user/Login';
 import About from "./js/view/user/About";
 import Profile from "./js/view/user/Profile";
 import MyProfile from "./js/view/user/MyProfile"
+import theme from "./js/config/theme";
 
 
 
@@ -32,7 +33,7 @@ const HomeStack = createStackNavigator(
         initialRouteName: "Home",
         defaultNavigationOptions: {
             headerStyle: {
-                backgroundColor: '#6a51ae',
+                backgroundColor: theme.pageBck,
             },
             headerTintColor: '#fff',
             headerTitleStyle: {

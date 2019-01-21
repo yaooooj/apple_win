@@ -11,6 +11,8 @@ export default {
     themeColor: 'rgb(22,131,251)',
     pageBackgroundColor: '#f4f4f4',
     grayColor: '#c4c4c4',
+    pageBck:'#75747B',
+    textColor:'#A58D6D',
     btnActiveOpacity: 0.7,
     actionBar: {
         height: (Platform.OS === 'android') ? px2dp(49) : px2dp(69),
