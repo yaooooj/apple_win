@@ -23,7 +23,7 @@ export default class Banner extends Component {
         onPageScroll: null,
         onPageSelected: null,
         onPageScrollStateChanged: null,
-        pageMargin: 15,
+        pageMargin: 0,
         horizontalScroll: true
     };
 

@@ -67,7 +67,7 @@ const UserStack = createStackNavigator(
         initialRouteName: "Profile",
         defaultNavigationOptions: {
             headerStyle: {
-                backgroundColor: '#046ada',
+                backgroundColor: theme.pageBck,
             },
             headerTintColor: '#fff',
             headerTitleStyle: {

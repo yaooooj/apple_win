@@ -173,13 +173,13 @@ const styles = StyleSheet.create({
         height: px2dp(100),
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: theme.pageBck,
         padding: px2dp(20),
-        borderTopWidth: 1/PixelRatio.get(),
+        //borderTopWidth: 1/PixelRatio.get(),
         borderBottomWidth: 1/PixelRatio.get(),
         borderBottomColor: '#c4c4c4',
         borderTopColor: '#e4e4e4',
-        marginTop: px2dp(10)
+        //marginTop: px2dp(10)
     },
     list:{
         flex: 1,
