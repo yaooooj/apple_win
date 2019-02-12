@@ -11,9 +11,14 @@ export default class Button extends Component{
         text: PropTypes.string,
         onPress: PropTypes.func,
         backgroundColor: PropTypes.string,
+        disable: PropTypes.bool,
+        color: PropTypes.string,
     };
+
     static defaultProps = {
-        backgroundColor: '#046ada'
+        backgroundColor: '#046ada',
+        disable: false,
+        color: '#fff'
     };
 
     render(){
@@ -38,9 +43,18 @@ export default class Button extends Component{
 
     _renderContent(){
         return(
-            <View style={{flex: 1, height: px2dp(45), backgroundColor: this.props.backgroundColor, alignItems:'center', justifyContent:'center',
-                borderRadius: 3}}>
-                <Text style={styles.text}>{this.props.text}</Text>
+            <View style={{
+                flex: 1,
+                height: px2dp(45),
+                backgroundColor: this.props.backgroundColor,
+                alignItems:'center',
+                justifyContent:'center',
+                borderRadius: 64,
+                borderWidth: 1,
+                borderColor: theme.borderColor
+
+            }}>
+                <Text style={{color: this.props.color, fontSize: px2dp(13)}}>{this.props.text}</Text>
             </View>
         );
     }
@@ -48,7 +62,7 @@ export default class Button extends Component{
 
 const styles = StyleSheet.create({
     text: {
-        color: 'white',
-        fontSize: px2dp(13)
-    }
+        color: theme.textColor,
+        fontSize: px2dp(13),
+    },
 });

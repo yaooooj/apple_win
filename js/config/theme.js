@@ -12,7 +12,10 @@ export default {
     pageBackgroundColor: '#f4f4f4',
     grayColor: '#c4c4c4',
     pageBck:'#75747B',
-    textColor:'#A58D6D',
+    //textColor:'#A58D6D',9A8979
+    textColor:'#9A8979',
+   // textColor: 'rgb(165,141,126)',
+    borderColor: 'rgba(165,141,126,0.4)',
     btnActiveOpacity: 0.7,
     actionBar: {
         height: (Platform.OS === 'android') ? px2dp(49) : px2dp(69),

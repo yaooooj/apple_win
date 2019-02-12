@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {View, Text, StatusBar, Platform, StyleSheet, Image, ScrollView, Dimensions,TextInput} from "react-native";
+import PropTypes from 'prop-types';
+import {View, Text, StatusBar, Platform, StyleSheet, Image, ScrollView, Dimensions,TextInput,PixelRatio} from "react-native";
 import theme from '../../config/theme';
 import Button from "../../component/Button";
 import ImageButton from  '../../component/Sticky';
 //import ImageButton from "../../component/ImageButton";
-
+import px2dp from "../../util/px2dp";
 
 import {Card, ThemeProvider} from 'react-native-elements';
 
@@ -38,6 +39,8 @@ export default class HomeView extends React.Component {
             staging12: false,
             staging18: false,
             staging1: false,
+            isFocus: false,
+            isLogin: PropTypes.bool,
         };
     }
 
@@ -159,9 +162,7 @@ export default class HomeView extends React.Component {
         )
     }
 
-    //{this.home_image_button(12,'ios-cart', this.state.staging12)}
-    //{this.home_image_button(18,'ios-car', this.state.staging18)}
-    //{this.home_image_button('自定义','ios-airplane', this.state.staging1)}
+
 
     home_button = (id)=> {
         return (
@@ -178,74 +179,134 @@ export default class HomeView extends React.Component {
         );
     };
 
+    banner = () => {
+        return (
+            <IndicatorBanner
+                style={{height:160, flex:1, backgroundColor:'white'}}
+                autoPlayEnable
+                indicator={this._renderDotIndicator()}
+            >
+                <View style={{backgroundColor:theme.textColor}}>
+                    <Text>page one</Text>
+                </View>
+                <View style={{backgroundColor:'cornflowerblue'}}>
+                    <Text>page two</Text>
+                </View>
+                <View style={{backgroundColor:'#1AA094'}}>
+                    <Text>page three</Text>
+                </View>
+            </IndicatorBanner>
+        )
+    };
+
     money = () => {
       return (
-          <Card onPress={this.onPressCard}>
+          <View style={styles.money} >
               <TextInput
                   keyboardType={'numeric'}
                   //backgroundColor = '#fff'
                   fontSize = {25}
-                  style={{alignSelf: 'center', fontWeight: 'bold', color: theme.textColor}}
-                  placeholder = {'3000'}
+                  style={{alignSelf: 'center', color: theme.textColor}}
+                  placeholder = {this.state.isFocus?'':'3000'}
                   placeholderTextColor = {theme.textColor}
-                  onChangeText={ (text1) => this.onPressMoney(text1)}
-                  //value={this.state.text}
+                  onChangeText={ (text1) => {
+                      this.setState({numberLimit: this.onPressMoney(text1)})
+                  }}
+                  value={this.state.numberLimit}
                   //autoFocus={}
                   underlineColorAndroid={'transparent'}
               />
-          </Card>
+          </View>
       )
     };
 
-    commitButton(){
-        alert('提交成功')
-    }
+    staging = () => {
+         return (
+             <View>
+                 {this.home_button('row1')}
+                 {this.home_button('row2')}
+             </View>
+         )
+    };
 
-    _renderDotIndicator() {
-        return <PagerDotIndicator pageCount={3}/>;
-    }
+    moreView = () => {
+        return (
+            <View style={{flex:1 , flexDirection: 'row', justifyContent: 'space-evenly', marginTop: 15}}>
+                <ImageButton
+                    text={'借钱指南'}
+                    onPress={this.onPress}
+                    icon={'ios-resize'}
+                    color={theme.textColor}
+                    imgSize={24}
+                    fontSize={12}
+                    isSelect={true}
+                />
+                <View style={{width: 1/PixelRatio.get(), backgroundColor:'#c4c4c4'}}/>
+                <ImageButton
+                    text={'还款指南'}
+                    onPress={this.onPress}
+                    icon={'ios-resize'}
+                    color={theme.textColor}
+                    imgSize={24}
+                    fontSize={12}
+                    isSelect={true}
+                />
+                <View style={{width: 1/PixelRatio.get(), backgroundColor:'#c4c4c4'}}/>
+                <ImageButton
+                    text={'额度指南'}
+                    onPress={this.onPress}
+                    icon={'ios-resize'}
+                    color={theme.textColor}
+                    imgSize={24}
+                    fontSize={12}
+                    isSelect={true}
+                />
+            </View>
+        )
+
+    };
+
+    commitButton = () =>{
+        if (this.state.isLogin){
+            this.props.navigation.navigate('Login')
+        } else {
+            this.props.navigation.navigate('MyProfile')
+        }
+    };
+
+    _renderDotIndicator = () => {
+        return (
+            <PagerDotIndicator pageCount={3}/>
+        );
+    };
 
     render() {
         return (
-            <View style={{ flex: 1, flexDirection: 'column',  justifyContent: 'flex-start', marginTop:10}}>
+            <View style={{ flex: 1, flexDirection: 'column',  justifyContent: 'flex-start'}}>
                 <ScrollView >
+                    <View style={styles.banner}>
+                        {this.banner()}
+                    </View>
                     <View style={{ flex: 1, flexDirection: 'column',  justifyContent: 'flex-start', marginTop:10, marginLeft: 15}}>
                         <Text style={{fontWeight: 'bold'}}>申请金额</Text>
                     </View>
-                    <View style={styles.money} >
+                    <View >
                         {this.money()}
                     </View>
                     <View style={{ flex: 1, flexDirection: 'column',  justifyContent: 'flex-start', marginTop:10, marginLeft: 15}}>
                         <Text style={{fontWeight: 'bold'}}>选择分期数</Text>
                     </View>
-                    <Card>
-                        {this.home_button('row1')}
-                        {this.home_button('row2')}
-                    </Card>
+                    <View style={styles.staging}>
+                        {this.staging()}
+                    </View>
                     <View style={styles.commit}>
                         <View>
-                            <Button text={'申请'} onPress={this.commitButton} backgroundColor={theme.textColor}/>
+                            <Button text={'快速申请'} onPress={this.commitButton} color={theme.textColor} backgroundColor={'#fff'}/>
                         </View>
                     </View>
-                    <View style={styles.banner}>
-                        <IndicatorBanner
-                            style={{height:200, flex:1, backgroundColor:'white'}}
-                            autoPlayEnable
-                            indicator={this._renderDotIndicator()}
-                        >
-                            <View style={{backgroundColor:theme.textColor}}>
-                                <Text>page one</Text>
-                            </View>
-                            <View style={{backgroundColor:'cornflowerblue'}}>
-                                <Text>page two</Text>
-                            </View>
-                            <View style={{backgroundColor:'#1AA094'}}>
-                                <Text>page three</Text>
-                            </View>
-                        </IndicatorBanner>
-                    </View>
-                    <View style={styles.more}>
 
+                    <View style={styles.more}>
+                        {this.moreView()}
                     </View>
                 </ScrollView>
             </View>
@@ -275,17 +336,32 @@ const styles=StyleSheet.create({
         margin: 20,
     },
     money:{
-
+        borderWidth: 1,
+        margin: 15,
+        marginBottom: 5,
+        height: px2dp(45),
+        justifyContent: 'center',
+        borderColor: theme.borderColor,
+        borderRadius: 64
     },
     staging:{
-
+        flex:1,
+        flexDirection:'column',
+        borderWidth:1,
+        margin: 15,
+        marginBottom: 5,
+        justifyContent: 'space-evenly',
+        padding: 10,
+        borderColor: theme.borderColor,
+        borderRadius: 10
     },
     commit:{
         marginTop: 20,
         margin: 15,
+        borderRadius: 64
     },
     banner:{
-        marginTop: 15,
+        //backgroundColor: 'rgba(224,224,224,0.2)'
     },
     more:{
 

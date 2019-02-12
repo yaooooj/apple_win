@@ -28,6 +28,8 @@ const HomeStack = createStackNavigator(
     {
         Home: {screen: HomeView,},
         Details: {screen: DetailsView,},
+        Login: Login,
+        MyProfile: MyProfile,
     },
     {
         initialRouteName: "Home",

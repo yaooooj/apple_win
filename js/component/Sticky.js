@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 7,
+        //backgroundColor: 'rgba(224,224,224,0.5)'
     },
     text:{
         color: 'rgba(255,255,255,0.7)',
